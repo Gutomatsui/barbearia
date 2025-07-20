@@ -15,47 +15,49 @@ datasource db {
 }
 
 model User {
-  id       String    @id @default(uuid())
-  email    String
-  name     String
-  booking  Booking[]
-  createAt DateTime  @default(now())
-  updateAt DateTime  @updatedAt
+  id String @id @default(uuid())
+  email String
+  name String
+  booking Booking[]
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
 }
 
 model Barbershop {
-  id          String              @id @default(uuid())
-  name        String
-  address     String
-  phone       String[]
+  id String @id @default(uuid())
+  name String
+  address String
+  phone String[]
   description String?
-  imageUrl    String
-  createAt    DateTime            @default(now())
-  updateAt    DateTime            @updatedAt
-  services    BarbershopService[]
+  imageUrl String
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+  services BarbershopService[]
 }
 
 model BarbershopService {
-  id           String     @id @default(uuid())
+  id String @id @default(uuid())
   barbershopId String
-  name         String
-  description  String?
-  imageUrl     String
-  price        Decimal    @db.Decimal(10, 2)
-  duration     Int
-  createAt     DateTime   @default(now())
-  updateAt     DateTime   @updatedAt
-  barbershop   Barbershop @relation(fields: [barbershopId], references: [id])
-  bookings     Booking[]
+  name String
+  description String?
+  imageUrl String
+  price Decimal @db.Decimal(10, 2)
+  duration Int
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+  barbershop Barbershop @relation(fields: [barbershopId], references: [id])
+  bookings Booking[]
 }
 
 model Booking {
-  id        String            @id @default(uuid())
-  userId    String
-  user      User              @relation(fields: [userId], references: [id])
+  id String @id @default(uuid())
+  userId String
+  user User @relation(fields: [userId], references: [id])
   serviceId String
-  service   BarbershopService @relation(fields: [serviceId], references: [id])
-  date      DateTime
-  createAt  DateTime          @default(now())
-  updateAt  DateTime          @updatedAt
+  service BarbershopService @relation(fields: [serviceId], references: [id])
+  date DateTime
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+  
+ 
 }
